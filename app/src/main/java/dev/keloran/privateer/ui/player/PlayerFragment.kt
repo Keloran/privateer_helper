@@ -52,14 +52,23 @@ class PlayerFragment : Fragment(), TextToSpeech.OnInitListener  {
 
       val result = Logic.AdvancedCombat(aggressor = shipA, defender = shipD)
       val spokenResult = when {
-        result.impossible.lose -> "Defender will always lose"
-        result.impossible.win -> "Aggressor will always lose"
-        else -> if (!result.impossible.lose && !result.impossible.win) {
-          "Aggressor needs to roll ${result.minRolls.aggressor}, Defender needs to roll ${result.minRolls.defender}"
-        } else ""
+        result.impossible?.win == true -> "Aggressor will always lose"
+        result.impossible?.lose == true -> "Defender will always lose"
+        result.other != null -> {
+          when {
+            result.other.aggressor == true -> "Aggressor needs to just roll, Defender needs ${result.minRolls?.defender}"
+            result.other.defender == true -> "Defender needs to just roll, Aggressor needs ${result.minRolls?.aggressor}"
+            else -> "Special condition not recognized"
+          }
+        }
+        else -> {
+          val aggressorRoll = result.minRolls?.aggressor?.let { "Aggressor needs to roll $it" } ?: ""
+          val defenderRoll = result.minRolls?.defender?.let { "Defender needs to roll $it" } ?: ""
+          "$defenderRoll, $aggressorRoll".trim().replaceFirst(",", "")
+        }
       }
       resultTextView.text = spokenResult
-      speakText(spokenResult)
+
     }
 
     resetButton.setOnClickListener {

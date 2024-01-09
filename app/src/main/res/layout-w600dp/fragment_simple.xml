@@ -2,39 +2,80 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
-
-  <!-- Add your form elements here -->
-  <EditText
-    android:id="@+id/inputBox1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:inputType="number"
-    android:hint="Your Cannons" />
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:background="@color/dracula_background">
 
   <EditText
-    android:id="@+id/inputBox2"
+    android:id="@+id/playerCannons"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:inputType="number"
+    android:hint="Player Cannons"
+    android:minHeight="48dp"
+    android:textAlignment="center"
+    android:background="@drawable/edittext_background"
+    android:textColor="@color/dracula_foreground"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:padding="4dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <EditText
+    android:id="@+id/enemyHull"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:hint="Enemy Hull"
+    android:textAlignment="center"
     android:inputType="number"
-    android:hint="Their Hull" />
-
-  <Button
-    android:id="@+id/submitButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Submit" />
-
-  <Button
-    android:id="@+id/resetButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Reset" />
+    android:minHeight="48dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:padding="4dp"
+    android:background="@drawable/edittext_background"
+    android:textColor="@color/dracula_foreground"
+    app:layout_constraintTop_toBottomOf="@id/playerCannons"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent" />
 
   <TextView
     android:id="@+id/resultTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="" />
+    android:text=""
+    android:padding="10dp"
+    android:textAlignment="center"
+    android:textColor="@color/dracula_foreground"
+    app:layout_constraintTop_toBottomOf="@id/enemyHull"
+    app:layout_constraintBottom_toTopOf="@id/reset"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"/>
+
+  <Button
+    android:id="@+id/fight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Dice Needed"
+    android:padding="16dp"
+    android:background="@drawable/button_confirm_background"
+    android:textColor="@color/dracula_foreground"
+    app:layout_constraintTop_toBottomOf="@id/resultTextView"
+    app:layout_constraintBottom_toTopOf="@id/reset"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp" />
+
+  <Button
+    android:id="@+id/reset"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Reset"
+    android:textColor="@color/dracula_foreground"
+    android:background="@drawable/button_cancel_background"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
 </LinearLayout>

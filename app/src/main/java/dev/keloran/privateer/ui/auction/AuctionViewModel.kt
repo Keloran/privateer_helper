@@ -53,12 +53,16 @@ class AuctionViewModel(private val applicationContext: Context) : ViewModel() {
         _currentTimeString.value = hmsTimeFormatter(millisUntilFinished)
         _currentTime.value = millisUntilFinished
 
-        speakIt(String.format("%2d", TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)))
+        // Trigger the speech slightly before the next tick
+        val secondsRemaining = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)
+        if (millisUntilFinished % 1000 > 750) { // Adjust the threshold as needed
+          speakIt(secondsRemaining.toString())
+        }
       }
+
 
       override fun onFinish() {
         timerStatus = TimerStatus.STOPPED
-        speakIt("Show Me The MONEY")
       }
     }.start()
   }
@@ -109,12 +113,13 @@ class AuctionViewModel(private val applicationContext: Context) : ViewModel() {
   }
 
   fun speakIt(text: String) {
-    if (text === "0") {
-      return
+    if (text == "0") {
+      textToSpeech.speak("Show me the money", TextToSpeech.QUEUE_FLUSH, null, null)
+    } else {
+      textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
-
-    textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
   }
+
 
   override fun onCleared() {
     if (::textToSpeech.isInitialized) {

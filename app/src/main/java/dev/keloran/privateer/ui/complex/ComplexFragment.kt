@@ -39,11 +39,20 @@ class ComplexFragment : Fragment() {
 
       val result = Logic.AdvancedCombat(aggressor = shipA, defender = shipD)
       val spokenResult = when {
-        result.impossible.lose -> "Merchant will always lose"
-        result.impossible.win -> "You will always lose"
-        else -> if (!result.impossible.lose && !result.impossible.win) {
-          "You needs to roll ${result.minRolls.aggressor}, Merchant needs to roll ${result.minRolls.defender}"
-        } else ""
+        result.impossible?.win == true -> "You will always lose"
+        result.impossible?.lose == true -> "Merchant will always lose"
+        result.other != null -> {
+          when {
+            result.other.aggressor == true -> "You needs to just roll, Merchant needs ${result.minRolls?.defender}"
+            result.other.defender == true -> "Merchant needs to just roll, You need ${result.minRolls?.aggressor}"
+            else -> "Special condition not recognized"
+          }
+        }
+        else -> {
+          val aggressorRoll = result.minRolls?.aggressor?.let { "You needs to roll $it" } ?: ""
+          val defenderRoll = result.minRolls?.defender?.let { "Merchant needs to roll $it" } ?: ""
+          "$defenderRoll, $aggressorRoll".trim().replaceFirst(",", "")
+        }
       }
       resultTextView.text = spokenResult
     }
