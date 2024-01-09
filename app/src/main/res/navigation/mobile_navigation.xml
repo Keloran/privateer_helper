@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/mobile_navigation"
+  app:startDestination="@+id/nav_simple">
+
+  <fragment
+    android:id="@+id/nav_simple"
+    android:name="dev.keloran.privateer.ui.simple.SimpleFragment"
+    android:label="@string/menu_simple"
+    android:tint="@color/dracula_purple"
+    tools:layout="@layout/fragment_simple" />
+
+  <fragment
+    android:id="@+id/nav_complex"
+    android:name="dev.keloran.privateer.ui.complex.ComplexFragment"
+    android:label="@string/menu_complex"
+    tools:layout="@layout/fragment_complex" />
+
+  <fragment
+    android:id="@+id/nav_player"
+    android:name="dev.keloran.privateer.ui.player.PlayerFragment"
+    android:label="@string/menu_player"
+    tools:layout="@layout/fragment_player" />
+
+  <fragment
+    android:id="@+id/nav_auction"
+    android:name="dev.keloran.privateer.ui.auction.AuctionFragment"
+    android:label="@string/menu_auction"
+    tools:layout="@layout/fragment_auction" />
+</navigation>

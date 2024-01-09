@@ -1,0 +1,40 @@
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <!-- Add your form elements here -->
+  <EditText
+    android:id="@+id/inputBox1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="number"
+    android:hint="Your Cannons" />
+
+  <EditText
+    android:id="@+id/inputBox2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="number"
+    android:hint="Their Hull" />
+
+  <Button
+    android:id="@+id/submitButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Submit" />
+
+  <Button
+    android:id="@+id/resetButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Reset" />
+
+  <TextView
+    android:id="@+id/resultTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="" />
+
+</LinearLayout>
